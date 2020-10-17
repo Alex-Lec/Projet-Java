@@ -1,5 +1,7 @@
 package mural;
 
+import com.sun.corba.se.impl.interceptors.PICurrent;
+
 import java.util.*;
 
 public class Drawing implements MuralComponents, Iterable<Picture> {
@@ -43,6 +45,15 @@ public class Drawing implements MuralComponents, Iterable<Picture> {
     @Override
     public String toString() {
         return "Drawing";
+    }
+
+    public Drawing copy() {
+        List<Picture> pictureList = new ArrayList<>(this.pictureSet);
+        Picture[] pictures = new Picture[pictureList.size()];
+        for (int i = 0; i < pictures.length; i++) {
+            pictures[i] = pictureList.get(i).copy();
+        }
+        return new Drawing(pictures);
     }
 
     @Override

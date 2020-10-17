@@ -49,6 +49,9 @@ public class Polygon extends Shape {
         super.setArea(area);
     }
 
+    /**
+     * @return Polygon
+     */
     public Polygon copy() {
         Point[] copyPoints = new Point[this.getPoints().length];
         for (int i = 0; i < copyPoints.length; i++) {

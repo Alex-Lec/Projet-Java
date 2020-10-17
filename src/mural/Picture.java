@@ -47,6 +47,15 @@ public class Picture implements MuralComponents, Iterable<Shape>, Comparable<Pic
         return 0;
     }
 
+    public Picture copy() {
+        List<Shape> shapeList = new ArrayList<>(this.shapeSet);
+        Shape[] shapesCopy = new Shape[this.shapeSet.size()];
+        for (int i = 0; i < shapesCopy.length; i++) {
+            shapesCopy[i] = shapeList.get(i).copy();
+        }
+        return new Picture(shapesCopy);
+    }
+
     public void sort() {
         this.shapeSet = new TreeSet<>(this.shapeSet);
     }

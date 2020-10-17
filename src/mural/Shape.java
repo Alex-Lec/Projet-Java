@@ -100,4 +100,6 @@ public abstract class Shape implements MuralComponents, Comparable<Shape> {
             p.axialSymmetry(l);
         }
     }
+
+    public abstract Shape copy();
 }
