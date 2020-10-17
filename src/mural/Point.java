@@ -1,5 +1,7 @@
 package mural;
 
+import java.util.Objects;
+
 public class Point implements GeometricTransformations {
     private double x, y;
 
@@ -30,6 +32,25 @@ public class Point implements GeometricTransformations {
 
     public Point copy() {
         return new Point(this.x, this.y);
+    }
+
+    @Override
+    public String toString() {
+        return "x = " + x + " y = " + y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Point)) return false;
+        Point point = (Point) o;
+        return Double.compare(point.getX(), getX()) == 0 &&
+                Double.compare(point.getY(), getY()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getX(), getY());
     }
 
     @Override

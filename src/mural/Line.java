@@ -1,5 +1,7 @@
 package mural;
 
+import java.util.Objects;
+
 public class Line extends Shape {
     private int thickness;
     private double length;
@@ -56,6 +58,26 @@ public class Line extends Shape {
 
     public double getOrderedAtOrigin() {
         return super.getPoints()[1].getY() - this.getSteeringRatio() * super.getPoints()[1].getX();
+    }
+
+    @Override
+    public String toString() {
+        return "Line : " + super.toString() + ", length = " + this.length + ", thickness = " + this.thickness;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Line)) return false;
+        if (!super.equals(o)) return false;
+        Line line = (Line) o;
+        return getThickness() == line.getThickness() &&
+                Double.compare(line.getLength(), getLength()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getThickness(), getLength());
     }
 
     @Override

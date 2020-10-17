@@ -1,6 +1,9 @@
 package mural;
 
-public abstract class Shape implements MuralComponents {
+import java.util.Arrays;
+import java.util.Objects;
+
+public abstract class Shape implements MuralComponents, Comparable<Shape> {
     private Point[] points;
     private double perimeter, area;
 
@@ -26,6 +29,41 @@ public abstract class Shape implements MuralComponents {
 
     public void setArea(double area) {
         this.area = area;
+    }
+
+    @Override
+    public String toString() {
+        return "points = " + Arrays.toString(points) +
+                ", perimeter = " + perimeter +
+                ", area = " + area;
+    }
+
+    @Override
+    public int compareTo(Shape s) {
+        double perimeterDifference = this.perimeter - s.getPerimeter();
+        if (perimeterDifference > 0) {
+            return 1;
+        } else if (perimeterDifference < 0) {
+            return -1;
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Shape)) return false;
+        Shape shape = (Shape) o;
+        return Double.compare(shape.getPerimeter(), getPerimeter()) == 0 &&
+                Double.compare(shape.getArea(), getArea()) == 0 &&
+                Arrays.equals(getPoints(), shape.getPoints());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getPerimeter(), getArea());
+        result = 31 * result + Arrays.hashCode(getPoints());
+        return result;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package mural;
 
+import java.util.Objects;
+
 public class Ellipsis extends Shape {
     private double halfMajorAxis, halfMinorAxis;
 
@@ -33,6 +35,30 @@ public class Ellipsis extends Shape {
 
     public void updateArea() {
         super.setArea(Math.PI * this.halfMajorAxis * this.halfMinorAxis);
+    }
+
+    public Ellipsis copy() {
+        return new Ellipsis(this.getPoints()[0].copy(), this.halfMajorAxis, this.halfMinorAxis);
+    }
+
+    @Override
+    public String toString() {
+        return "Ellipsis : " + super.toString() + ", halfMajorAxis = " + this.halfMajorAxis + ", halfMinorAxis = " + this.halfMinorAxis;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ellipsis)) return false;
+        if (!super.equals(o)) return false;
+        Ellipsis ellipsis = (Ellipsis) o;
+        return Double.compare(ellipsis.getHalfMajorAxis(), getHalfMajorAxis()) == 0 &&
+                Double.compare(ellipsis.getHalfMinorAxis(), getHalfMinorAxis()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getHalfMajorAxis(), getHalfMinorAxis());
     }
 
     @Override
