@@ -107,4 +107,9 @@ public class Line extends Shape {
     public void axialSymmetry(Line l) {
         super.axialSymmetry(l);
     }
+
+    @Override
+    public Shape copy() {
+        return new Line(super.getPoints()[0].copy(), super.getPoints()[1].copy(), this.thickness);
+    }
 }
